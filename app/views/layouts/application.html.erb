@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= @page_title || "Event application" %></title>
+    
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <div class="container">
+  	  <div class="row">
+        <div class="col-md-12">
+          <% if flash[:notice].present? %>
+            <p class="alert alert-success"><%= flash[:notice] %></p>
+          <% end %>
+          <% if flash[:alert].present? %>
+  	        <p class="alert alert-danger"><%= flash[:alert] %></p>
+          <% end %>
+        </div>
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

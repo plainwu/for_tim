@@ -1,0 +1,42 @@
+<h1>Event list</h1>
+
+<div id="demo">
+
+<%= form_tag bulk_update_events_path do %>
+<table class="table">
+	
+	<% @events.each do |event| %>
+	<tr>
+	<div id="title-square">
+	<td id="title">
+		<%= check_box_tag "ids[]", event.id, false %>
+	<%= event.name %>
+	</td>
+	</div>
+	<td>
+	<%= link_to 'attendees', event_attendees_path(event), :class => "btn btn-default" %>
+	<%= link_to 'location', event_location_path(event) %>
+	<%= link_to "Show", event_path(event), :class => "btn btn-primary" %>
+	<%= link_to " (XML)", event_path(event, :format => :xml), :class => "btn btn-default" %>
+	<%= link_to " (JSON)", event_path(event, :format => :json), :class => "btn btn-default" %>
+	<%= link_to 'edit', edit_event_path(event), :class => "btn btn-default" %>
+	<%= button_to 'delete', event_path(event), :method => :delete, :data => { :confirm => "Are you sure ?" }, :class => "btn btn-danger" %>
+	</td>
+	</tr>
+<% end %>
+	<%= submit_tag "Delete" %>
+	<%= submit_tag "Publish" %>
+</table>
+
+
+<% end %>
+<p id="new-event">
+<%= link_to 'New Event', new_event_path %>
+</p>
+<%= paginate @events %>
+<%= button_to "Delete All", bulk_delete_events_path, :method => :post %>
+
+
+
+</div>
+<%= image_tag("Toothless.jpg") %>
